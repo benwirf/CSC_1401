@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Tokyo countdown</title>
+</head>
+
+<body>
+
+	<h1 id="countdown_clock">Loading...</h1>
+	
+	<script>
+	const MS_PER_DAY = 1000*60*60*24;
+	const MS_PER_HOUR = 1000*60*60;
+	const MS_PER_MINUTE = 1000*60;
+	const MS_PER_SECOND = 1000;
+	var eventTimer = setInterval(timeUntilEvent, 1000);
+	function timeUntilEvent(){
+		var eventName = "Tokyo 2020";
+		var eventYear = "2021";
+		var eventMonth = "07";
+		var eventDay = "23";
+		var eventTime = "20:00:00.000";//official start time is 8pm Tokyo local time
+		var utcOffset = "+09:00";
+		var tokyoStart = new Date(eventYear+"-"+eventMonth+"-"+eventDay+"T"+eventTime+utcOffset);/*Construct a date time string in
+		ISO 8601 format with UTC offset e.g. "2021-07-23T20:00:00.000+09:00"*/
+		var currentTime = new Date();
+		var timeToGo = tokyoStart.getTime()-currentTime.getTime();
+		var eventOver = tokyoStart.getTime()-new Date("2021-08-08T23:00:00.000+09:00").getTime();//End of closing ceremony
+		if (timeToGo <= 0){
+			clearInterval(eventTimer);
+			if (eventOver <= timeToGo && timeToGo <= 0){
+				document.getElementById("countdown_clock").innerHTML = eventName+" Countdown: "+"Event started!";
+			}
+			else if (timeToGo < eventOver){
+				document.getElementById("countdown_clock").innerHTML = eventName+" Countdown: "+"Sorry, you missed it!";
+			}
+		}
+		var days = Math.floor(timeToGo/MS_PER_DAY);
+		var hrs = Math.floor((timeToGo % MS_PER_DAY)/MS_PER_HOUR);
+		var mins = Math.floor(((timeToGo % MS_PER_DAY) % MS_PER_HOUR)/MS_PER_MINUTE);
+		var secs = Math.floor((((timeToGo % MS_PER_DAY) % MS_PER_HOUR) % MS_PER_MINUTE)/MS_PER_SECOND);
+		document.getElementById("countdown_clock").innerHTML = eventName+" Countdown: "+days+" Days  "+hrs+" Hours  "+mins+" Minutes  "+secs+" Seconds";
+	}
+	</script>
+	
+</body>
+
+</html>

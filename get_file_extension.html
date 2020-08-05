@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Input File</title>
+</head>
+<body>
+<script>
+
+var input = document.createElement("input");
+input.type = "file";
+input.id = "in_file";
+//document.body.appendChild(input);
+//alert(input.id);
+input.addEventListener("change", getExt);
+
+var trig = document.createElement("button");
+document.body.appendChild(trig);
+trig.innerHTML = "Browse to file";
+trig.addEventListener("click", simClick);
+
+var para1 = document.createElement("p");
+para1.id = "para_1";
+para1.innerHTML = "Check file extension";
+document.body.appendChild(para1);
+
+function getExt(e){ 
+	var file = e.target.files[0];
+	var ext = file.name.slice(file.name.lastIndexOf('.')+1);
+	document.getElementById("para_1").innerHTML = "The file extension is: "+ext;
+}
+
+function simClick(){
+	input.click();
+	//alert("hi");
+}
+
+</script>
+</body>
+<html>
