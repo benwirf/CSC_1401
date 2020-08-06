@@ -32,16 +32,16 @@
 			clearInterval(eventTimer);
 			if (eventOver <= timeToGo && timeToGo <= 0){
 				document.getElementById("countdown_clock").innerHTML = eventName+" Countdown: "+"Event started!";
-			}
-			else if (timeToGo < eventOver){
+			} else if (timeToGo < eventOver){
 				document.getElementById("countdown_clock").innerHTML = eventName+" Countdown: "+"Sorry, you missed it!";
 			}
+		} else {
+			var days = Math.floor(timeToGo/MS_PER_DAY);
+			var hrs = Math.floor((timeToGo % MS_PER_DAY)/MS_PER_HOUR);
+			var mins = Math.floor(((timeToGo % MS_PER_DAY) % MS_PER_HOUR)/MS_PER_MINUTE);
+			var secs = Math.floor((((timeToGo % MS_PER_DAY) % MS_PER_HOUR) % MS_PER_MINUTE)/MS_PER_SECOND);
+			document.getElementById("countdown_clock").innerHTML = eventName+" Countdown: "+days+" Days  "+hrs+" Hours  "+mins+" Minutes  "+secs+" Seconds";
 		}
-		var days = Math.floor(timeToGo/MS_PER_DAY);
-		var hrs = Math.floor((timeToGo % MS_PER_DAY)/MS_PER_HOUR);
-		var mins = Math.floor(((timeToGo % MS_PER_DAY) % MS_PER_HOUR)/MS_PER_MINUTE);
-		var secs = Math.floor((((timeToGo % MS_PER_DAY) % MS_PER_HOUR) % MS_PER_MINUTE)/MS_PER_SECOND);
-		document.getElementById("countdown_clock").innerHTML = eventName+" Countdown: "+days+" Days  "+hrs+" Hours  "+mins+" Minutes  "+secs+" Seconds";
 	}
 	</script>
 	
